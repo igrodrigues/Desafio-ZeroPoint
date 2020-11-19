@@ -11,7 +11,7 @@ public class User {
 	private String email;
 	private String senha;
 	private String telefone;
-	private String endereço;
+	private String endereco;
 	private String complemento;
 	private int numero;
 	private String cidade;
@@ -22,7 +22,7 @@ public class User {
 	private static int size = 16;
 	
 	public String[] getAll(){
-		String[] a = {id,  nome, sobrenome, rg, cpf, email, senha, telefone, endereço, complemento, Integer.toString(numero), cidade, estado, datacriacao.toString(), dataalt.toString(), String.valueOf(status)};
+		String[] a = {id,  nome, sobrenome, rg, cpf, email, senha, telefone, endereco, complemento, Integer.toString(numero), cidade, estado, datacriacao.toString(), dataalt.toString(), String.valueOf(status)};
 		return a;
 	}
 	
@@ -35,7 +35,7 @@ public class User {
 		this.email = a[5];
 		this.senha = a[6];
 		this.telefone = a[7];
-		this.endereço = a[8];
+		this.endereco = a[8];
 		this.complemento = a[9];
 		this.numero = Integer.parseInt(a[10]);
 		this.cidade = a[11];
@@ -97,11 +97,11 @@ public class User {
 	public void setTelefone(String telefone) {
 		this.telefone = telefone;
 	}
-	public String getEndereço() {
-		return endereço;
+	public String getEndereco() {
+		return endereco;
 	}
-	public void setEndereço(String endereço) {
-		this.endereço = endereço;
+	public void setEndereco(String endereco) {
+		this.endereco = endereco;
 	}
 	public String getComplemento() {
 		return complemento;

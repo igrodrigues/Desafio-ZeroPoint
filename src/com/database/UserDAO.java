@@ -1,6 +1,8 @@
 package com.database;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class UserDAO {
 	private Connection connection;
@@ -18,7 +20,7 @@ public class UserDAO {
 										+ "email,"
 										+ "senha,"
 										+ "telefone,"
-										+ "endereço,"
+										+ "endereco,"
 										+ "complemento,"
 										+ "numero,"
 										+ "cidade,"
@@ -51,6 +53,21 @@ public class UserDAO {
 			}
 			User user = new User();
 			user.setId(rs.getString("id"));
+			user.setNome(rs.getString("nome"));
+			user.setSobrenome(rs.getString("sobrenome"));
+			user.setRg(rs.getString("rg"));
+			user.setCpf(rs.getString("cpf"));
+			user.setEmail(rs.getString("email"));
+			user.setSenha(rs.getString("senha"));
+			user.setTelefone(rs.getString("telefone"));
+			user.setEndereco(rs.getString("endereco"));
+			user.setComplemento(rs.getString("complemento"));
+			user.setNumero(Integer.parseInt(rs.getString("numero")));
+			user.setCidade(rs.getString("cidade"));
+			user.setEstado(rs.getString("estado"));
+			user.setDatacriacao(Date.valueOf(rs.getString("datacricacao")));
+			user.setDataalt(Date.valueOf(rs.getString("dataalt")));
+			user.setStatus(rs.getString("status").charAt(0));
 			return user;
 		}catch(SQLException e) {
 			throw new RuntimeException(e);
@@ -94,6 +111,39 @@ public class UserDAO {
 			stmt.setString(1, id);
 	        stmt.execute();
 	        stmt.close();
+		}catch(SQLException e) {
+			throw new RuntimeException(e);
+		}
+	}
+	
+	public List<User> getLista(){
+		try {
+			List<User> users = new ArrayList<User>(); 
+			PreparedStatement stmt = connection.prepareStatement("select * from users");
+			ResultSet rs = stmt.executeQuery();
+			while(rs.next()) {
+				User user = new User();
+				user.setId(rs.getString("id"));
+				user.setNome(rs.getString("nome"));
+				user.setSobrenome(rs.getString("sobrenome"));
+				user.setRg(rs.getString("rg"));
+				user.setCpf(rs.getString("cpf"));
+				user.setEmail(rs.getString("email"));
+				user.setSenha(rs.getString("senha"));
+				user.setTelefone(rs.getString("telefone"));
+				user.setEndereco(rs.getString("endereco"));
+				user.setComplemento(rs.getString("complemento"));
+				user.setNumero(Integer.parseInt(rs.getString("numero")));
+				user.setCidade(rs.getString("cidade"));
+				user.setEstado(rs.getString("estado"));
+				user.setDatacriacao(Date.valueOf(rs.getString("datacricacao")));
+				user.setDataalt(Date.valueOf(rs.getString("dataalt")));
+				user.setStatus(rs.getString("status").charAt(0));
+				users.add(user);
+			}
+			rs.close();
+			stmt.close();
+			return users;
 		}catch(SQLException e) {
 			throw new RuntimeException(e);
 		}
