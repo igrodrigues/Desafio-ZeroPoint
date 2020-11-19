@@ -19,6 +19,35 @@ public class User {
 	private Date datacriacao;
 	private Date dataalt;
 	private char status;
+	private static int size = 16;
+	
+	public String[] getAll(){
+		String[] a = {id,  nome, sobrenome, rg, cpf, email, senha, telefone, endereço, complemento, Integer.toString(numero), cidade, estado, datacriacao.toString(), dataalt.toString(), String.valueOf(status)};
+		return a;
+	}
+	
+	public void setAll(String[] a) {
+		this.id = a[0];
+		this.nome = a[1];
+		this.sobrenome = a[2];
+		this.rg = a[3];
+		this.cpf = a[4];
+		this.email = a[5];
+		this.senha = a[6];
+		this.telefone = a[7];
+		this.endereço = a[8];
+		this.complemento = a[9];
+		this.numero = Integer.parseInt(a[10]);
+		this.cidade = a[11];
+		this.estado = a[12];
+		this.datacriacao = Date.valueOf(a[13]);
+		this.dataalt = Date.valueOf(a[14]);
+		this.status = a[15].charAt(0);
+	}
+	
+	public int getSize() {
+		return size;
+	}
 	
 	public String getId() {
 		return id;
