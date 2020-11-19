@@ -26,15 +26,12 @@ public class UserDAO {
 										+ "datacriacao,"
 										+ "dataalt,"
 										+ "status)"+" values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-		
 		try {
 			PreparedStatement stmt = connection.prepareStatement(sql);
-			
 			String[] a = user.getAll();
 			for(int i = 0; i < user.getSize(); i++) {
 				stmt.setString(i, a[i]);
 			}
-			
 			stmt.execute();
 			stmt.close();
 		}catch(SQLException e) {
@@ -44,7 +41,6 @@ public class UserDAO {
 	
 	public User busca(String id) {
 		String sql = "select * from users where id = ?";
-		
 		try {
 			PreparedStatement stmt = connection.prepareStatement(sql);
 			ResultSet rs = stmt.executeQuery();
@@ -57,9 +53,50 @@ public class UserDAO {
 			user.setId(rs.getString("id"));
 			return user;
 		}catch(SQLException e) {
-			
+			throw new RuntimeException(e);
 		}
-		return null;
+	}
+	
+	public void atualiza(User user) {
+		String sql = "update users set nome = ?,"
+									+ "sobrenome = ?,"
+									+ "rg = ?,"
+									+ "cpf = ?,"
+									+ "email = ?,"
+									+ "senha = ?,"
+									+ "telefone = ?,"
+									+ "endereço = ?,"
+									+ "complemento = ?,"
+									+ "numero = ?,"
+									+ "cidade = ?"
+									+ "estado = ?,"
+									+ "datacriacao = ?,"
+									+ "dataalt = ?,"
+									+ "status = ? where id = ?";
+		try {
+			PreparedStatement stmt = connection.prepareStatement(sql);
+			String[] a = user.getAll();
+			int i = 1;
+			for(i = 1; i < user.getSize(); i++) {
+				stmt.setString(i-1, a[i]);
+			}
+			stmt.setString(i, user.getId());
+			stmt.execute();
+	        stmt.close();
+		}catch(SQLException e) {
+			throw new RuntimeException(e);
+		}
+	}
+	
+	public void remove(String id) {
+		try {
+			PreparedStatement stmt = connection.prepareStatement("delete from contatos where id=?");
+			stmt.setString(1, id);
+	        stmt.execute();
+	        stmt.close();
+		}catch(SQLException e) {
+			throw new RuntimeException(e);
+		}
 	}
 }
 
