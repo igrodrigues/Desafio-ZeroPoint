@@ -42,34 +42,16 @@ public class UserDAO {
 		}
 	}
 	
-	public User busca(String id) {
+	public boolean busca(String id) {
 		String sql = "select * from users where id = ?";
 		try {
 			PreparedStatement stmt = connection.prepareStatement(sql);
+			stmt.setString(1, id);
 			ResultSet rs = stmt.executeQuery();
 			if(!rs.next()) {
-				rs.close();
-				stmt.close();
-				return null;
+				return false;
 			}
-			User user = new User();
-			user.setId(rs.getString("id"));
-			user.setNome(rs.getString("nome"));
-			user.setSobrenome(rs.getString("sobrenome"));
-			user.setRg(rs.getString("rg"));
-			user.setCpf(rs.getString("cpf"));
-			user.setEmail(rs.getString("email"));
-			user.setSenha(rs.getString("senha"));
-			user.setTelefone(rs.getString("telefone"));
-			user.setEndereco(rs.getString("endereco"));
-			user.setComplemento(rs.getString("complemento"));
-			user.setNumero(rs.getString("numero"));
-			user.setCidade(rs.getString("cidade"));
-			user.setEstado(rs.getString("estado"));
-			user.setDatacriacao(rs.getString("datacricacao"));
-			user.setDataalt(rs.getString("dataalt"));
-			user.setStatus(rs.getString("status"));
-			return user;
+			return true;
 		}catch(SQLException e) {
 			throw new RuntimeException(e);
 		}
@@ -137,7 +119,7 @@ public class UserDAO {
 				user.setNumero(rs.getString("numero"));
 				user.setCidade(rs.getString("cidade"));
 				user.setEstado(rs.getString("estado"));
-				user.setDatacriacao(rs.getString("datacricacao"));
+				user.setDatacriacao(rs.getString("datacriacao"));
 				user.setDataalt(rs.getString("dataalt"));
 				user.setStatus(rs.getString("status"));
 				users.add(user);
