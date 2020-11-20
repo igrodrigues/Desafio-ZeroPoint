@@ -1,6 +1,5 @@
 package com.database;
 
-import java.sql.*;
 
 public class User {
 	private String id;
@@ -13,16 +12,16 @@ public class User {
 	private String telefone;
 	private String endereco;
 	private String complemento;
-	private int numero;
+	private String numero;
 	private String cidade;
 	private String estado;
-	private Date datacriacao;
-	private Date dataalt;
-	private char status;
+	private String datacriacao;
+	private String dataalt;
+	private String status;
 	private static int size = 16;
 	
 	public String[] getAll(){
-		String[] a = {id,  nome, sobrenome, rg, cpf, email, senha, telefone, endereco, complemento, Integer.toString(numero), cidade, estado, datacriacao.toString(), dataalt.toString(), String.valueOf(status)};
+		String[] a = {id,  nome, sobrenome, rg, cpf, email, senha, telefone, endereco, complemento, numero, cidade, estado, datacriacao.toString(), dataalt.toString(), String.valueOf(status)};
 		return a;
 	}
 	
@@ -37,12 +36,12 @@ public class User {
 		this.telefone = a[7];
 		this.endereco = a[8];
 		this.complemento = a[9];
-		this.numero = Integer.parseInt(a[10]);
+		this.numero = a[10];
 		this.cidade = a[11];
 		this.estado = a[12];
-		this.datacriacao = Date.valueOf(a[13]);
-		this.dataalt = Date.valueOf(a[14]);
-		this.status = a[15].charAt(0);
+		this.datacriacao = a[13];
+		this.dataalt = a[14];
+		this.status = a[15];
 	}
 	
 	public int getSize() {
@@ -109,10 +108,10 @@ public class User {
 	public void setComplemento(String complemento) {
 		this.complemento = complemento;
 	}
-	public int getNumero() {
+	public String getNumero() {
 		return numero;
 	}
-	public void setNumero(int numero) {
+	public void setNumero(String numero) {
 		this.numero = numero;
 	}
 	public String getCidade() {
@@ -127,22 +126,22 @@ public class User {
 	public void setEstado(String estado) {
 		this.estado = estado;
 	}
-	public Date getDatacriacao() {
+	public String getDatacriacao() {
 		return datacriacao;
 	}
-	public void setDatacriacao(Date datacriacao) {
+	public void setDatacriacao(String datacriacao) {
 		this.datacriacao = datacriacao;
 	}
-	public Date getDataalt() {
+	public String getDataalt() {
 		return dataalt;
 	}
-	public void setDataalt(Date dataalt) {
+	public void setDataalt(String dataalt) {
 		this.dataalt = dataalt;
 	}
-	public char getStatus() {
+	public String getStatus() {
 		return status;
 	}
-	public void setStatus(char status) {
+	public void setStatus(String status) {
 		this.status = status;
 	}
 }

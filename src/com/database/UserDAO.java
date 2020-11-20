@@ -1,5 +1,6 @@
 package com.database;
 
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -31,8 +32,8 @@ public class UserDAO {
 		try {
 			PreparedStatement stmt = connection.prepareStatement(sql);
 			String[] a = user.getAll();
-			for(int i = 0; i < user.getSize(); i++) {
-				stmt.setString(i, a[i]);
+			for(int i = 1; i <= user.getSize(); i++) {
+				stmt.setString(i, a[i-1]);
 			}
 			stmt.execute();
 			stmt.close();
@@ -62,12 +63,12 @@ public class UserDAO {
 			user.setTelefone(rs.getString("telefone"));
 			user.setEndereco(rs.getString("endereco"));
 			user.setComplemento(rs.getString("complemento"));
-			user.setNumero(Integer.parseInt(rs.getString("numero")));
+			user.setNumero(rs.getString("numero"));
 			user.setCidade(rs.getString("cidade"));
 			user.setEstado(rs.getString("estado"));
-			user.setDatacriacao(Date.valueOf(rs.getString("datacricacao")));
-			user.setDataalt(Date.valueOf(rs.getString("dataalt")));
-			user.setStatus(rs.getString("status").charAt(0));
+			user.setDatacriacao(rs.getString("datacricacao"));
+			user.setDataalt(rs.getString("dataalt"));
+			user.setStatus(rs.getString("status"));
 			return user;
 		}catch(SQLException e) {
 			throw new RuntimeException(e);
@@ -133,12 +134,12 @@ public class UserDAO {
 				user.setTelefone(rs.getString("telefone"));
 				user.setEndereco(rs.getString("endereco"));
 				user.setComplemento(rs.getString("complemento"));
-				user.setNumero(Integer.parseInt(rs.getString("numero")));
+				user.setNumero(rs.getString("numero"));
 				user.setCidade(rs.getString("cidade"));
 				user.setEstado(rs.getString("estado"));
-				user.setDatacriacao(Date.valueOf(rs.getString("datacricacao")));
-				user.setDataalt(Date.valueOf(rs.getString("dataalt")));
-				user.setStatus(rs.getString("status").charAt(0));
+				user.setDatacriacao(rs.getString("datacricacao"));
+				user.setDataalt(rs.getString("dataalt"));
+				user.setStatus(rs.getString("status"));
 				users.add(user);
 			}
 			rs.close();
